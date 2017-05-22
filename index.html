@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script  src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script  type="text/javascript">
+
+   $(document).ready(function() {
+     var form = $("form[name='form']");
+      var add = $("a[id='add_comment']");
+
+
+     $("#hide").on("click",function(){
+        $("#comments").hide(1000);
+         $("#hide").hide();
+         $("#show").show();
+         $(form).replaceWith(add);
+     });
+
+     $("#show").on("click",function(){
+         $("#comments").show(1000);
+         $("#hide").show();
+         $("#show").hide();
+         $(add).replaceWith(form);
+     });
+
+     $(document).on("click", "#add_comment", function () {
+      form.css("display", "block");
+      $(add).replaceWith(form);
+     });
+
+     $(document).on("click", "input[name='send']", function () {
+      var comment = $("textarea[name='comment']").val ();
+      alert("Подождите идет загрузка комментариев...");
+      $('p').remove();
+      $("<p>" + comment + "</p>").appendTo("#comments");
+     });
+    });
+   </script>
+  </head>
+  <body>
+    <a href="#" id="hide"  onclick="return false">Скрыть коментарий </a>
+    <a href="#" id="show"  style="display:none"  onclick="return false">Показать коментарий </a>
+   <div id="comments">
+    <p>комментарий 1</p>
+    <p>комментарий 2</p>
+    <p>комментарий 3</p>
+   </div>
+   <form name="form" action="#" method="post" id="form" style="display:none" onsubmit="return false">
+    <textarea id="textarea" name="comment" cols="30" rows="10"></textarea><br />
+    <input type="submit" name="send" value="Добавить комментарий" id="done" />
+   </form>
+   <a href="#" onclick="return false" id="add_comment">Добавить Комментарий</a>
+  </body>
+</html>
